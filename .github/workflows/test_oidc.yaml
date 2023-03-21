@@ -29,5 +29,5 @@ jobs:
         run: |
           ls -la
           # SAM CLI Testing
-          sam build && sam package --s3-bucket github-actions-testing-21-03-2023
+          sam package --s3-bucket github-actions-testing-21-03-2023
         shell: bash
