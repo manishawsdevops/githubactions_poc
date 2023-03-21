@@ -26,5 +26,7 @@ jobs:
           role-session-name: OIDCSession
 
       - name: Checking AWS Connections
-        run: aws s3 ls
+        run: |
+          ls -la
+          aws s3 ls
         shell: bash
