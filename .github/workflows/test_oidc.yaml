@@ -28,5 +28,6 @@ jobs:
       - name: Checking AWS Connections
         run: |
           ls -la
-          aws s3 ls
+          # SAM CLI Testing
+          sam build && sam package --s3-bucket github-actions-testing-21-03-2023
         shell: bash
