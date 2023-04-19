@@ -8,16 +8,15 @@ on:
 
 permissions:
   id-token: write # This is required for requesting the JWT
-  contents: read  # This is required for actions/checkout
+  contents: read # This is required for actions/checkout
 
 jobs:
   Explore-AWS-OIDC:
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout
         uses: actions/checkout@v3
- 
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -28,6 +27,7 @@ jobs:
       - name: Checking AWS Connections
         run: |
           ls -la
+          aws s3 ls
           # SAM CLI Testing
-          sam package --s3-bucket github-actions-testing-21-03-2023
+          # sam package --s3-bucket github-actions-testing-21-03-2023
         shell: bash
