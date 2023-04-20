@@ -17,9 +17,14 @@ jobs:
   print-input-values:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Validating the inputs
+        run: |
           echo "Input Value: $Val"
           ls
           cat test1.txt
+        shell: bash
         env:
           Val: ${{ inputs.var1 }}
