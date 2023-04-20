@@ -25,6 +25,7 @@ jobs:
         run: |
           echo "Input Value: $Val"
           ls
+          echo "DB URL: $Val1"
           cat test1.txt
         shell: bash
         env:
