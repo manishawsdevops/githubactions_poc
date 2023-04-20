@@ -1,0 +1,23 @@
+name: Testing Manual execution of Github Actions.
+run-name: ${{ github.actor }} is testing out workflow dispatch actions.
+
+on:
+  workflow_dispatch:
+    inputs:
+      var1:
+        description: Testing variable 1
+        required: true
+        default: "Test-var1"
+        type: choice
+        options:
+          - "value1"
+          - "value2"
+          - "value3"
+jobs:
+  print-input-values:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Input Value: $Val"
+        env:
+          Val: ${{ inputs.var1 }}
