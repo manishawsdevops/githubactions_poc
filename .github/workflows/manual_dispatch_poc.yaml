@@ -35,7 +35,7 @@ jobs:
 
       - name: Hello world action step
         id: hello
-        uses: manishawsfreelancer/liquibase-github-action@v2
+        uses: manishawsfreelancer/liquibase-github-action@main
         with:
           who-to-greet: "Baahubali"
       # Use the output from the `hello` step
