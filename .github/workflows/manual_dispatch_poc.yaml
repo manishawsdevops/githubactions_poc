@@ -36,7 +36,6 @@ jobs:
   Deploy_to_PostgreSQL:
     runs-on: ubuntu-latest
     if: ${{ inputs.var1 == 'Value2'}}
-    needs: Deploy_to_Snwoflake
     environment: ${{ github.ref_name }}
     steps:
       - name: Checkout
