@@ -33,21 +33,11 @@ jobs:
           Val: ${{ inputs.var1 }}
           Val1: ${{ vars.DB_URL}}
 
-  Deploy_to_PostgreSQL:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.var1 == 'Value2'}}
-    environment: ${{ github.ref_name }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Validating the inputs
-        run: |
-          echo "Input Value: $Val"
-          ls
-          echo "DB URL: $Val1"
-          cat test1.txt
-        shell: bash
-        env:
-          Val: ${{ inputs.var1 }}
-          Val1: ${{ vars.DB_URL}}
+      - name: Hello world action step
+        id: hello
+        uses: manishawsfreelancer/liquibase-github-action@v1
+        with:
+          who-to-greet: "Baahubali"
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
