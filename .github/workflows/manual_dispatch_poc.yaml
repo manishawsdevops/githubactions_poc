@@ -14,7 +14,25 @@ on:
           - "value2"
           - "value3"
 jobs:
-  print-input-values:
+  Deploy_to_Snwoflake:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Validating the inputs
+        run: |
+          echo "Input Value: $Val"
+          ls
+          echo "DB URL: $Val1"
+          cat test1.txt
+        shell: bash
+        env:
+          Val: ${{ inputs.var1 }}
+          Val1: ${{ vars.DB_URL}}
+
+  Deploy_to_PostgreSQL:
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name }}
     steps:
