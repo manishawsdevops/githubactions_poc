@@ -19,6 +19,7 @@ jobs:
     steps:
       - run: |
           echo "Input Value: $Val"
+          ls
           cat test1.txt
         env:
           Val: ${{ inputs.var1 }}
