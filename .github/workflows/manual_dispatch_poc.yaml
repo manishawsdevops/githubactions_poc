@@ -27,9 +27,8 @@ jobs:
           echo "Input Value: $Val"
           ls
           echo "DB URL: $Val1"
-          echo "DB_PASSWORD: $DB_PASSWORD"
+          echo "test: $DB_PASSWORD"
           cat test1.txt
-          echo
         shell: bash
         env:
           Val: ${{ inputs.var1 }}
