@@ -42,6 +42,7 @@ jobs:
           who-to-greet: "Baahubali"
           DB_URL: ${{ vars.DB_URL }}
           DB_PASSWORD: ${{ secrets.DB_USER_NAME }}
+          DB_FAMILY: "snowflake"
 
       # Use the output from the `hello` step
       - name: Get the output time
