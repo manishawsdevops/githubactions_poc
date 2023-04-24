@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       Deploy_into_Snowflake:
-        description: Checking if you want to deploy into Snowflake environment
+        description: Deploy into Snowflake environment
         required: true
         default: "No"
         type: choice
@@ -30,15 +30,12 @@ jobs:
         env:
           input1: ${{ inputs.Deploy_into_Snowflake }}
 
-      # - name: Deploying into Snowflake ${{ github.ref_name }} environment
-      #   id: snowflake_deploy
-      #   uses: manishawsfreelancer/liquibase-github-action@main
-      #   with:
-      #     who-to-greet: "Baahubali"
-      #     DB_URL: ${{ vars.DB_URL }}
-      #     DB_PASSWORD: ${{ secrets.DB_USER_NAME }}
-      #     DB_FAMILY: "snowflake"
-
-      # # Use the output from the `hello` step
-      # - name: Get the output time
-      #   run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - name: Deploying into Snowflake ${{ github.ref_name }} environment
+        id: snowflake_deploy
+        uses: manishawsfreelancer/liquibase-github-action@main
+        with:
+          DB_URL: ${{ vars.DB_URL }}
+          DB_USERNAME: ${{ vars.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_FAMILY: "snowflake"
+          DB_CHANGELOGFILE: "db_scripts/changelog.sf.xml"
