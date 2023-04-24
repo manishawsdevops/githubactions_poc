@@ -12,6 +12,14 @@ on:
         options:
           - "No"
           - "Yes"
+      Dry_Run:
+        description: Mention if its Dry Run
+        required: true
+        default: "No"
+        type: choice
+        options:
+          - "Yes"
+          - "No"
 
 jobs:
   Deploy_to_Snwoflake:
@@ -39,3 +47,4 @@ jobs:
           DB_PASSWORD: ${{ secrets.SF_PASSWORD }}
           DB_FAMILY: "snowflake"
           DB_CHANGELOGFILE: "db_scripts/changelog.sf.xml"
+          DRY_RUN: ${{ inputs.Dry_Run}}
