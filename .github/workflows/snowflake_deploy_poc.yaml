@@ -15,7 +15,7 @@ on:
       Dry_Run:
         description: Mention if its Dry Run
         required: true
-        default: "No"
+        default: "Yes"
         type: choice
         options:
           - "Yes"
