@@ -40,6 +40,7 @@ jobs:
         uses: manishawsfreelancer/liquibase-github-action@main
         with:
           who-to-greet: "Baahubali"
+          DB_URL: ${{ vars.DB_URL }}
 
       # Use the output from the `hello` step
       - name: Get the output time
