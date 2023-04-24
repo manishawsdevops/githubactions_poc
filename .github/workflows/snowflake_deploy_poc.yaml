@@ -40,7 +40,7 @@ jobs:
 
       - name: Deploying into Snowflake ${{ github.ref_name }} environment
         id: snowflake_deploy
-        uses: manishawsfreelancer/liquibase-github-action@main
+        uses: manishawsdevops/liquibase-github-action@main
         with:
           DB_URL: ${{ vars.SF_DB_URL }}
           DB_USERNAME: ${{ vars.SF_USERNAME }}
