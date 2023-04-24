@@ -1,0 +1,44 @@
+name: Testing Deployment into Snowflake using worflow_dispatch
+run-name: ${{ github.actor }} is executing workflow.
+
+on:
+  workflow_dispatch:
+    inputs:
+      Deploy_into_Snowflake:
+        description: Checking if you want to deploy into Snowflake environment
+        required: true
+        default: "No"
+        type: choice
+        options:
+          - "No"
+          - "Yes"
+
+jobs:
+  Deploy_to_Snwoflake:
+    if: ${{ inputs.Deploy_into_Snowflake == 'Yes'}}
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Validating the inputs
+        run: |
+          ls
+          echo "Deploy_into_snowflake: $input1"
+        shell: bash
+        env:
+          input1: ${{ inputs.Deploy_into_Snowflake }}
+
+      # - name: Deploying into Snowflake ${{ github.ref_name }} environment
+      #   id: snowflake_deploy
+      #   uses: manishawsfreelancer/liquibase-github-action@main
+      #   with:
+      #     who-to-greet: "Baahubali"
+      #     DB_URL: ${{ vars.DB_URL }}
+      #     DB_PASSWORD: ${{ secrets.DB_USER_NAME }}
+      #     DB_FAMILY: "snowflake"
+
+      # # Use the output from the `hello` step
+      # - name: Get the output time
+      #   run: echo "The time was ${{ steps.hello.outputs.time }}"
