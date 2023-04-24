@@ -27,17 +27,21 @@ jobs:
           echo "Input Value: $Val"
           ls
           echo "DB URL: $Val1"
+          echo "DB_PASSWORD: $DB_PASSWORD"
           cat test1.txt
+          echo
         shell: bash
         env:
           Val: ${{ inputs.var1 }}
           Val1: ${{ vars.DB_URL}}
+          DB_PASSWORD: ${{ secrets.DB_USER_NAME }}}
 
-      - name: Hello world action step
-        id: hello
-        uses: manishawsfreelancer/liquibase-github-action@main
-        with:
-          who-to-greet: "Baahubali"
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+      # - name: Hello world action step
+      #   id: hello
+      #   uses: manishawsfreelancer/liquibase-github-action@main
+      #   with:
+      #     who-to-greet: "Baahubali"
+
+      # # Use the output from the `hello` step
+      # - name: Get the output time
+      #   run: echo "The time was ${{ steps.hello.outputs.time }}"
