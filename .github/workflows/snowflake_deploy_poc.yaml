@@ -34,8 +34,8 @@ jobs:
         id: snowflake_deploy
         uses: manishawsfreelancer/liquibase-github-action@main
         with:
-          DB_URL: ${{ vars.DB_URL }}
-          DB_USERNAME: ${{ vars.DB_USERNAME }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_URL: ${{ vars.SF_DB_URL }}
+          DB_USERNAME: ${{ vars.SF_USERNAME }}
+          DB_PASSWORD: ${{ secrets.SF_PASSWORD }}
           DB_FAMILY: "snowflake"
           DB_CHANGELOGFILE: "db_scripts/changelog.sf.xml"
