@@ -34,9 +34,11 @@ jobs:
         run: |
           ls
           echo "Deploy_into_snowflake: $input1"
+          echo "Dry_Run: $input2"
         shell: bash
         env:
           input1: ${{ inputs.Deploy_into_Snowflake }}
+          input2: ${{ inputs.Dry_Run }}
 
       - name: Deploying into Snowflake ${{ github.ref_name }} environment
         id: snowflake_deploy
