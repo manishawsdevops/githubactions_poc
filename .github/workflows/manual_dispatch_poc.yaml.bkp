@@ -1,0 +1,49 @@
+name: Testing Manual execution of Github Actions.
+run-name: ${{ github.actor }} is testing out workflow dispatch actions.
+
+on:
+  workflow_dispatch:
+    inputs:
+      var1:
+        description: Testing variable 1
+        required: true
+        default: "Test-var1"
+        type: choice
+        options:
+          - "value1"
+          - "value2"
+          - "value3"
+jobs:
+  Deploy_to_Snwoflake:
+    if: ${{ inputs.var1 == 'Value1'}}
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Validating the inputs
+        run: |
+          echo "Input Value: $Val"
+          ls
+          echo "DB URL: $Val1"
+          echo "test: $DB_PASSWORD"
+          cat test1.txt
+        shell: bash
+        env:
+          Val: ${{ inputs.var1 }}
+          Val1: ${{ vars.DB_URL}}
+          DB_PASSWORD: ${{ secrets.DB_USER_NAME }}}
+
+      - name: Hello world action step
+        id: hello
+        uses: manishawsfreelancer/liquibase-github-action@main
+        with:
+          who-to-greet: "Baahubali"
+          DB_URL: ${{ vars.DB_URL }}
+          DB_PASSWORD: ${{ secrets.DB_USER_NAME }}
+          DB_FAMILY: "snowflake"
+
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"

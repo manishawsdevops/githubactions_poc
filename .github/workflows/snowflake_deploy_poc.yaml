@@ -1,0 +1,52 @@
+name: Testing Deployment into Snowflake using worflow_dispatch
+run-name: ${{ github.actor }} is executing workflow.
+
+on:
+  workflow_dispatch:
+    inputs:
+      Deploy_into_Snowflake:
+        description: Deploy into Snowflake environment
+        required: true
+        default: "No"
+        type: choice
+        options:
+          - "No"
+          - "Yes"
+      Dry_Run:
+        description: Mention if its Dry Run
+        required: true
+        default: "Yes"
+        type: choice
+        options:
+          - "Yes"
+          - "No"
+
+jobs:
+  Deploy_to_Snwoflake:
+    if: ${{ inputs.Deploy_into_Snowflake == 'Yes'}}
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Validating the inputs
+        run: |
+          ls
+          echo "Deploy_into_snowflake: $input1"
+          echo "Dry_Run: $input2"
+        shell: bash
+        env:
+          input1: ${{ inputs.Deploy_into_Snowflake }}
+          input2: ${{ inputs.Dry_Run }}
+
+      - name: Deploying into Snowflake ${{ github.ref_name }} environment
+        id: snowflake_deploy
+        uses: manishawsdevops/liquibase-github-action@main
+        with:
+          DB_URL: ${{ vars.SF_DB_URL }}
+          DB_USERNAME: ${{ vars.SF_USERNAME }}
+          DB_PASSWORD: ${{ secrets.SF_PASSWORD }}
+          DB_FAMILY: "snowflake"
+          DB_CHANGELOGFILE: "db_scripts/changelog.sf.xml"
+          DRY_RUN: ${{ inputs.Dry_Run}}
